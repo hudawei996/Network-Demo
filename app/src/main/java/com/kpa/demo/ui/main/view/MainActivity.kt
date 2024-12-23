@@ -1,29 +1,32 @@
 package com.kpa.demo.ui.main.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kpa.demo.R
 import com.kpa.demo.data.api.ApiHelper
 import com.kpa.demo.data.http.NetWorkHelper
 import com.kpa.demo.data.model.Girls
+import com.kpa.demo.databinding.ActivityMainBinding
 import com.kpa.demo.ui.base.ViewModelFactory
 import com.kpa.demo.ui.main.adapter.MainAdapter
 import com.kpa.demo.ui.main.viewmodel.MainViewModel
 import com.kpa.demo.utils.Status
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var adapter: MainAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        // 初始化绑定对象
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         setupUI()
         setupViewModel()
         setupObserver()
@@ -33,17 +36,19 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.getGirls().observe(this, Observer {
             it?.let { resource ->
                 when (resource.status) {
-                   Status.SUCCESS -> {
-                       recyclerView.visibility = View.VISIBLE
-                        progressBar.visibility = View.GONE
+                    Status.SUCCESS -> {
+                        binding.recyclerView.visibility = View.VISIBLE
+                        binding.progressBar.visibility = View.GONE
                         resource.data?.let { girls -> renderList(girls) }
                     }
+
                     Status.ERROR -> {
-                        progressBar.visibility = View.VISIBLE
-                        recyclerView.visibility = View.GONE
+                        binding.progressBar.visibility = View.VISIBLE
+                        binding.recyclerView.visibility = View.GONE
                     }
+
                     Status.LOADING -> {
-                        progressBar.visibility = View.VISIBLE
+                        binding.progressBar.visibility = View.VISIBLE
                     }
                 }
             }
@@ -52,8 +57,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViewModel() {
         mainViewModel =
-            ViewModelProviders.of(this, ViewModelFactory(ApiHelper(NetWorkHelper.apiService))).get(
-                MainViewModel::class.java)
+            ViewModelProvider(
+                this,
+                //调整为默认可以不写这个每次都要写的参数,如果需要特别指定就写下
+                //多级分层是可方便替换每个类的实现,方便扩展
+//                ViewModelFactory(ApiHelper(NetWorkHelper.apiService))
+                ViewModelFactory()
+            )[MainViewModel::class.java]
     }
 
     private fun renderList(girls: Girls) {
@@ -64,14 +74,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = MainAdapter(arrayListOf())
-        recyclerView.addItemDecoration(
+        binding.recyclerView.addItemDecoration(
             DividerItemDecoration(
-                recyclerView.context,
-                (recyclerView.layoutManager as LinearLayoutManager).orientation
+                binding.recyclerView.context,
+                (binding.recyclerView.layoutManager as LinearLayoutManager).orientation
             )
         )
-        recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
     }
 }
