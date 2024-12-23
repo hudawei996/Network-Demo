@@ -22,8 +22,11 @@ android {
         }
     }
 
-    viewBinding {
-        enabled = true
+//    viewBinding {
+//        enabled = true
+//    }
+    buildFeatures {
+        viewBinding = true
     }
     namespace 'com.kpa.demo'
 }
