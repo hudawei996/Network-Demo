@@ -29,7 +29,7 @@ class HttpLoggingInterceptor : Interceptor {
             body = buffer.readString(charset!!)
         }
         Log.i(TAG,
-            " send request: \n method = ${request.method}"
+            "======= send request: \n method = ${request.method}"
         + " \n url = ${request.url}"
         + " \n request header = ${request.headers}"
         + " \n request params = $body"
@@ -53,7 +53,7 @@ class HttpLoggingInterceptor : Interceptor {
         rBody = buffer.clone().readString(charset!!)
 
         Log.i(TAG,
-            "received : code = ${response.code}"
+            "===== received : code = ${response.code}"
                     + "\n url = ${response.request.url}"
                     + "\n body = $body"
                     + "\n response $rBody ")
