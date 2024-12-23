@@ -10,6 +10,6 @@ import retrofit2.http.Path
  */
 
 interface ApiService  {
-    @GET("{page}")
+    @GET("/api/girls/{page}")
     suspend fun getGirls(@Path("page") page: Int): Girls
 }
