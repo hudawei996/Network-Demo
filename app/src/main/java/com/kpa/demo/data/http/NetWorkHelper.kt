@@ -7,6 +7,5 @@ import com.kpa.demo.data.api.ApiService
  *    e-mail : billkp@yeah.net
  */
 object NetWorkHelper {
-    val apiService =
-        ServiceCreator.createService(ApiService::class.java)
+    val apiService = ServiceCreator.createService(ApiService::class.java)
 }

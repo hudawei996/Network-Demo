@@ -15,7 +15,8 @@ object ServiceCreator {
     private val okHttpClient by lazy { OkHttpClient().newBuilder() }
     private val retrofit: Retrofit by lazy {
         val builder = Retrofit.Builder()
-            .baseUrl("https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/")
+//            .baseUrl("https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/")
+            .baseUrl("http://192.168.3.186/")
             .addConverterFactory(GsonConverterFactory.create())
 //            .addConverterFactory(ScalarsConverterFactory.create())
         val dispatcher = Dispatcher()
@@ -34,7 +35,6 @@ object ServiceCreator {
 
     fun <T> create(clazz: Class<T>): T = retrofit.create(clazz)
 
-    inline fun <reified T> createService(clazz: Class<T>): T =
-        create(clazz)
+    inline fun <reified T> createService(clazz: Class<T>): T = create(clazz)
 
 }
