@@ -12,4 +12,7 @@ import retrofit2.http.Path
 interface ApiService  {
     @GET("/api/girls/{page}")
     suspend fun getGirls(@Path("page") page: Int): Girls
+
+    @GET("")
+    suspend fun getBaidu(): String
 }

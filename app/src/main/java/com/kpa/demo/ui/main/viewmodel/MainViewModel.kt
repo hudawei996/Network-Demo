@@ -21,4 +21,13 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
             emit(Resource.error(e.message, null))
         }
     }
+
+    fun getBaidu() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            emit(Resource.success(mainRepository.getBaidu()))
+        } catch (e: Exception) {
+            emit(Resource.error(e.message, null))
+        }
+    }
 }

@@ -33,13 +33,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObserver() {
-        mainViewModel.getGirls().observe(this, Observer {
+//        mainViewModel.getGirls().observe(this, Observer {
+//            it?.let { resource ->
+//                when (resource.status) {
+//                    Status.SUCCESS -> {
+//                        binding.recyclerView.visibility = View.VISIBLE
+//                        binding.progressBar.visibility = View.GONE
+//                        resource.data?.let { girls -> renderList(girls) }
+//                    }
+//
+//                    Status.ERROR -> {
+//                        binding.progressBar.visibility = View.VISIBLE
+//                        binding.recyclerView.visibility = View.GONE
+//                    }
+//
+//                    Status.LOADING -> {
+//                        binding.progressBar.visibility = View.VISIBLE
+//                    }
+//                }
+//            }
+//        })
+
+        mainViewModel.getBaidu().observe(this, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
                         binding.recyclerView.visibility = View.VISIBLE
                         binding.progressBar.visibility = View.GONE
-                        resource.data?.let { girls -> renderList(girls) }
+                        resource.data?.let {
+                            //String -> renderList(girls)
+                        }
                     }
 
                     Status.ERROR -> {
