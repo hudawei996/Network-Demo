@@ -8,8 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kpa.demo.data.api.ApiHelper
-import com.kpa.demo.data.http.NetWorkHelper
 import com.kpa.demo.data.model.Girls
 import com.kpa.demo.databinding.ActivityMainBinding
 import com.kpa.demo.ui.base.ViewModelFactory
@@ -55,29 +53,29 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-//        mainViewModel.getBaidu().observe(this, Observer { it ->
-//            it?.let { resource ->
-//                when (resource.status) {
-//                    Status.SUCCESS -> {
-//                        binding.recyclerView.visibility = View.VISIBLE
-//                        binding.progressBar.visibility = View.GONE
-//                        resource.data?.let { ittt ->
-//                            //String -> renderList(girls)
-//                            Log.d("tag",ittt)
-//                        }
-//                    }
-//
-//                    Status.ERROR -> {
-//                        binding.progressBar.visibility = View.VISIBLE
-//                        binding.recyclerView.visibility = View.GONE
-//                    }
-//
-//                    Status.LOADING -> {
-//                        binding.progressBar.visibility = View.VISIBLE
-//                    }
-//                }
-//            }
-//        })
+        mainViewModel.getString().observe(this, Observer { it ->
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        binding.recyclerView.visibility = View.VISIBLE
+                        binding.progressBar.visibility = View.GONE
+                        resource.data?.let { ittt ->
+                            //String -> renderList(girls)
+                            Log.d("tag",ittt)
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                        binding.recyclerView.visibility = View.GONE
+                    }
+
+                    Status.LOADING -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
+                }
+            }
+        })
     }
 
     private fun setupViewModel() {

@@ -3,6 +3,7 @@ package com.kpa.demo.data.api
 import com.kpa.demo.data.model.Girls
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  *    author : kpa
@@ -10,9 +11,9 @@ import retrofit2.http.Path
  */
 
 interface ApiService  {
-    @GET("/api/girls/{page}")
-    suspend fun getGirls(@Path("page") page: Int): Girls
+    @GET("/api/girls")
+    suspend fun getGirls(@Query("page") page: Int): Girls
 
     @GET("")
-    suspend fun getBaidu(): String
+    suspend fun getString(): String
 }

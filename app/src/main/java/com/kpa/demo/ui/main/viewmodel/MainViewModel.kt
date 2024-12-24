@@ -22,10 +22,10 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
         }
     }
 
-    fun getBaidu() = liveData(Dispatchers.IO) {
+    fun getString() = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try {
-            emit(Resource.success(mainRepository.getBaidu()))
+            emit(Resource.success(mainRepository.getString()))
         } catch (e: Exception) {
             emit(Resource.error(e.message, null))
         }

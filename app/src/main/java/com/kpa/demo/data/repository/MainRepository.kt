@@ -8,5 +8,5 @@ import com.kpa.demo.data.api.ApiHelper
  */
 class MainRepository(private val apiHelper: ApiHelper) {
     suspend fun getGirls() = apiHelper.getGirls()
-    suspend fun getBaidu() = apiHelper.getBaidu()
+    suspend fun getString() = apiHelper.getString()
 }
