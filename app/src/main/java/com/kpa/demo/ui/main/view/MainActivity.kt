@@ -1,6 +1,7 @@
 package com.kpa.demo.ui.main.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -33,36 +34,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObserver() {
-//        mainViewModel.getGirls().observe(this, Observer {
-//            it?.let { resource ->
-//                when (resource.status) {
-//                    Status.SUCCESS -> {
-//                        binding.recyclerView.visibility = View.VISIBLE
-//                        binding.progressBar.visibility = View.GONE
-//                        resource.data?.let { girls -> renderList(girls) }
-//                    }
-//
-//                    Status.ERROR -> {
-//                        binding.progressBar.visibility = View.VISIBLE
-//                        binding.recyclerView.visibility = View.GONE
-//                    }
-//
-//                    Status.LOADING -> {
-//                        binding.progressBar.visibility = View.VISIBLE
-//                    }
-//                }
-//            }
-//        })
-
-        mainViewModel.getBaidu().observe(this, Observer {
+        mainViewModel.getGirls().observe(this, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
                         binding.recyclerView.visibility = View.VISIBLE
                         binding.progressBar.visibility = View.GONE
-                        resource.data?.let {
-                            //String -> renderList(girls)
-                        }
+                        resource.data?.let { girls -> renderList(girls) }
                     }
 
                     Status.ERROR -> {
@@ -76,6 +54,30 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
+//        mainViewModel.getBaidu().observe(this, Observer { it ->
+//            it?.let { resource ->
+//                when (resource.status) {
+//                    Status.SUCCESS -> {
+//                        binding.recyclerView.visibility = View.VISIBLE
+//                        binding.progressBar.visibility = View.GONE
+//                        resource.data?.let { ittt ->
+//                            //String -> renderList(girls)
+//                            Log.d("tag",ittt)
+//                        }
+//                    }
+//
+//                    Status.ERROR -> {
+//                        binding.progressBar.visibility = View.VISIBLE
+//                        binding.recyclerView.visibility = View.GONE
+//                    }
+//
+//                    Status.LOADING -> {
+//                        binding.progressBar.visibility = View.VISIBLE
+//                    }
+//                }
+//            }
+//        })
     }
 
     private fun setupViewModel() {
