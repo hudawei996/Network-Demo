@@ -1,5 +1,5 @@
-{
-  "data": [
+
+  [
     {
       "_id": "1",
       "author": "Author1",
@@ -150,9 +150,4 @@
       "url": "http://example.com/url10",
       "views": 1000
     }
-  ],
-  "page": 1,
-  "page_count": 1,
-  "status": 200,
-  "total_counts": 10
-}
+  ]

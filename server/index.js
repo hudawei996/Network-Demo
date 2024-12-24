@@ -170,9 +170,25 @@ const testData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
 
 
 // 定义一个路由来返回测试数据
-//app.get('/api/girls', (req, res) => {
-app.get('', (req, res) => {
-  res.json(testData);
+app.get('/api/girls', (req, res) => {
+//app.get('', (req, res) => {
+//  res.json(testData);
+
+  //提取 page 参数
+  const page = parseInt(req.query.page, 10) || 1; // 默认页码为 1
+  const pageSize = 2; // 每页显示的数据条数
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  //返回分页数据：
+  const paginatedData = testData.slice(startIndex, endIndex);
+
+  res.json({
+    page: page,
+    pageSize: pageSize,
+    total: testData.length,
+    data: paginatedData
+  });
+
 });
 
 // 启动服务器
@@ -182,7 +198,7 @@ app.get('', (req, res) => {
 // 监听所有网络接口
 //const PORT = 443;
 const PORT = 3000;
-const HOST = '192.168.3.186'; // 或者使用具体的局域网 IP 地址，如 '192.168.3.186'
+const HOST = '192.168.3.186';
 app.listen(PORT, HOST, () => {
-    console.log(`Server running at http://${HOST}:${PORT}/`);
+    console.log(`Server running at http://${HOST}:${PORT}`);
 });
