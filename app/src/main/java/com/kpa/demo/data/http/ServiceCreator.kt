@@ -16,7 +16,7 @@ object ServiceCreator {
     private val retrofit: Retrofit by lazy {
         val builder = Retrofit.Builder()
 //            .baseUrl("https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/")
-            .baseUrl("http://192.168.3.186:3000/")
+            .baseUrl("http://192.168.3.223:3000/")
             .addConverterFactory(GsonConverterFactory.create())
 //            .addConverterFactory(ScalarsConverterFactory.create())
         val dispatcher = Dispatcher()
