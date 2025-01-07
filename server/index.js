@@ -198,7 +198,7 @@ app.get('/api/girls', (req, res) => {
 // 监听所有网络接口
 //const PORT = 443;
 const PORT = 3000;
-const HOST = '192.168.3.186';
+const HOST = '192.168.3.223';//每天IP不一样,每次运行都要检查下这个IP是否设置正确
 app.listen(PORT, HOST, () => {
     console.log(`Server running at http://${HOST}:${PORT}`);
 });
