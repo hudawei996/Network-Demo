@@ -13,10 +13,10 @@ import java.lang.Exception
  *    e-mail : billkp@yeah.net
  */
 class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
-    fun getGirls() = liveData(Dispatchers.IO) {
+    fun getGirls(page:Int) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try {
-            emit(Resource.success(mainRepository.getGirls()))
+            emit(Resource.success(mainRepository.getGirls(page)))
         } catch (e: Exception) {
             emit(Resource.error(e.message, null))
         }

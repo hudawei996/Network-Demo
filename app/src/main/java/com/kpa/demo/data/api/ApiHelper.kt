@@ -7,6 +7,6 @@ import com.kpa.demo.data.http.NetWorkHelper
  *    e-mail : billkp@yeah.net
  */
 class ApiHelper(private val apiService: ApiService = NetWorkHelper.apiService) {
-    suspend fun getGirls() = apiService.getGirls(1)
+    suspend fun getGirls(page: Int = 1) = apiService.getGirls(page)
     suspend fun getString() = apiService.getString()
 }

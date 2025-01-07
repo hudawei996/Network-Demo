@@ -7,6 +7,6 @@ import com.kpa.demo.data.api.ApiHelper
  *    e-mail : billkp@yeah.net
  */
 class MainRepository(private val apiHelper: ApiHelper) {
-    suspend fun getGirls() = apiHelper.getGirls()
+    suspend fun getGirls(page:Int = 1) = apiHelper.getGirls(page)
     suspend fun getString() = apiHelper.getString()
 }
